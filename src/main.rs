@@ -1,5 +1,6 @@
 mod file;
 use std::env;
+use file::Files;
 
 fn main() {
 
@@ -8,7 +9,7 @@ fn main() {
     let directory_name = &args[1];
     let file_extension = &args[2];
 
-    let files_to_analyze: Vec<String> = file::get_files_of_directory(directory_name, file_extension);
-    println!("Files to analyze, {:?}", files_to_analyze);
+    let files_to_analyze: Files = file::get_files_to_analyze(directory_name, file_extension);
+    println!("Files to analyze, {}", files_to_analyze);
 }
 
