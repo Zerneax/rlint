@@ -30,7 +30,7 @@ impl fmt::Display for FileForAnalyze {
 }   
 
 pub struct Line {
-    content: String,
+    pub content: String,
     line: i32,
 }
 
