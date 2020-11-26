@@ -37,7 +37,7 @@ pub struct Line {
 
 impl fmt::Display for Line {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "line: {0} | content: {1}", self.line, self.content)
+        write!(f, "line: {0} | contendt: {1}", self.line, self.content)
     }
 }
 
