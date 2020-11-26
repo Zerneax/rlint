@@ -3,13 +3,15 @@ use std::collections::HashMap;
 use std::fmt;
 
 pub enum Rule {
-    LineLength(i32)
+    LineLength(i32),
+    Quote(String)
 }
 
 impl fmt::Display for Rule {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             Rule::LineLength(value) => write!(f, "{}", value),
+            Rule::Quote(value) => write!(f, "{}", value)
         }
     }
 }
@@ -44,6 +46,12 @@ pub fn init_rules(settings: HashMap<String, String>) -> Rules {
     for (key, value) in settings {
         if key.eq("LineLength") {
             rules.push(Rule::LineLength(value.parse::<i32>().unwrap()));
+        } else if key.eq("Quote") {
+            if value.eq("simple") {
+                rules.push(Rule::Quote(String::from("\"")));
+            } else {
+                rules.push(Rule::Quote(String::from("'")));
+            }
         }
     }
 

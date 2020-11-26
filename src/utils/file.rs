@@ -19,6 +19,7 @@ impl fmt::Display for Files {
 
 pub struct FileForAnalyze {
     pub lines: Vec<Line>,
+    pub filename: String
 }
 
 impl fmt::Display for FileForAnalyze {
@@ -31,7 +32,7 @@ impl fmt::Display for FileForAnalyze {
 
 pub struct Line {
     pub content: String,
-    line: i32,
+    pub line: i32,
 }
 
 impl fmt::Display for Line {
@@ -73,10 +74,10 @@ fn read_file(filename: &str) -> FileForAnalyze {
     let mut lines_line: Vec<Line> = Vec::new();
 
     for (pos, l) in lines_string.iter().enumerate() {
-        lines_line.push(Line {content: l.to_string(), line: pos as i32});
+        lines_line.push(Line {content: l.to_string(), line: 1 + pos as i32});
     }
 
-    FileForAnalyze {lines: lines_line}
+    FileForAnalyze {lines: lines_line, filename: String::from(filename)}
 
 }
 
