@@ -4,14 +4,16 @@ use std::fmt;
 
 pub enum Rule {
     LineLength(i32),
-    Quote(String)
+    Quote(String),
+    NoTrailingWhitespace,
 }
 
 impl fmt::Display for Rule {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             Rule::LineLength(value) => write!(f, "{}", value),
-            Rule::Quote(value) => write!(f, "{}", value)
+            Rule::Quote(value) => write!(f, "{}", value),
+            Rule::NoTrailingWhitespace => write!(f, "no trailing whitespace")
         }
     }
 }
@@ -52,6 +54,10 @@ pub fn init_rules(settings: HashMap<String, String>) -> Rules {
             } else {
                 rules.push(Rule::Quote(String::from("'")));
             }
+        } else if key.eq("No-trailing-whitespace") {
+           if value.eq("true") {
+               rules.push(Rule::NoTrailingWhitespace);
+           }
         }
     }
 

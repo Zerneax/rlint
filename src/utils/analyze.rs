@@ -33,6 +33,12 @@ pub fn check_rules_on_file(file: &FileForAnalyze, rules: &Rules) -> Vec<String> 
                         errors.push(file.filename.to_string() + ":" + &line.line.to_string() + " - Should be '");
                     }
                 }
+                Rule::NoTrailingWhitespace => {
+                    let last_char: Option<char> = line.content.chars().last();
+                    if last_char.is_some() && last_char.unwrap() == ' ' {
+                        errors.push(file.filename.to_string() + ":" + &line.line.to_string() + " - trailing whitespace");
+                    }
+                }
             }
         }
     }
